@@ -22,18 +22,18 @@ public enum EnumBoolean {
     FALSE("0", "否");
 
     @Getter
-    private String key;
+    private String code;
     @Getter
-    private String value;
+    private String desc;
 
-    EnumBoolean(String key, String value) {
-        this.key = key;
-        this.value = value;
+    EnumBoolean(String code, String desc) {
+        this.code = code;
+        this.desc = desc;
     }
 
-    public EnumBoolean getValueByKey(String key) {
+    public EnumBoolean getByCode(String key) {
         for (EnumBoolean item : values()) {
-            if (item.getKey().equals(key)) {
+            if (item.getCode().equals(key)) {
                 return item;
             }
         }

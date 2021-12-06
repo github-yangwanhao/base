@@ -28,8 +28,7 @@ public @interface InEnum {
     String message() default "参数值不在被校验范围内";
 
     /**
-     * 待检查的值(以|符分隔)
-     *
+     * 模板枚举类,该枚举类必须提供一个getCode()方法供切面类调用 该方法返回当前枚举实例对象的code
      */
     Class<?> template();
 

@@ -25,13 +25,13 @@ public enum EnumGender {
     WOMAN("0", "女");
 
     @Getter
-    private String key;
+    private String code;
     @Getter
-    private String value;
+    private String desc;
 
-    public EnumGender getValueByKey(String key) {
+    public EnumGender getByCode(String key) {
         for (EnumGender item : values()) {
-            if (item.getKey().equals(key)) {
+            if (item.getCode().equals(key)) {
                 return item;
             }
         }
