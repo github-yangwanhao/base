@@ -1,8 +1,14 @@
 package cn.yangwanhao.util;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.commons.lang3.StringUtils;
+
+import cn.yangwanhao.base.constant.DatePattern;
+import cn.yangwanhao.base.constant.GlobalConstant;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -79,15 +85,6 @@ public class DateUtils {
     }
 
     /**
-     * 获取今天过去n天的日期
-     * @param past n
-     * @return date
-     */
-    public static Date getPastDate(Integer past) {
-        return getPastDate(new Date(), past);
-    }
-
-    /**
      * 获取某个日期未来n天的日期
      * @param date 指定的日期
      * @param feature 需要获取的指定日期的几天前的日期
@@ -101,12 +98,58 @@ public class DateUtils {
     }
 
     /**
-     * 获取今天未来n天的日期
-     * @param feature 需要获取的指定日期的几天前的日期
-     * @return date
+     * 判断date是否在beginDate和endDate之间（入参都是Date类型）
+     *
+     * @param date date
+     * @param beginDate beginDate
+     * @param endDate endDate
+     * @return true-在范围之内；false-不在范围内
      */
-    public static Date getFeatureDate(Integer feature) {
-        return getFeatureDate(new Date(), feature);
+    public static boolean isInRange(Date date, Date beginDate, Date endDate) {
+        long time = date.getTime();
+        long beginTime = beginDate.getTime();
+        long endTime = endDate.getTime();
+        return time >= beginTime && time <= endTime;
+    }
+
+    /**
+     * 将指定格式的日期字符串转换为日期对象。
+     *
+     * @param source 日期字符串。
+     * @param pattern 模式。
+     * @return Date 日期对象。
+     */
+    public static Date parseDate(String source, String pattern) {
+        SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+        return sdf.parse(source, new ParsePosition(0));
+    }
+
+    /**
+     * 按照format把date转为string
+     *
+     * @param date date
+     * @param pattern pattern
+     * @return String
+     */
+    public static String date2String(Date date, String pattern) {
+        if (date == null) {
+            return GlobalConstant.EMPTY_STRING;
+        }
+        SimpleDateFormat sdf = getDateFormat(pattern);
+        return sdf.format(date);
+    }
+
+    /**
+     * 根据传入pattern格式化日期
+     *
+     * @param pattern pattern
+     * @return SimpleDateFormat
+     */
+    private static SimpleDateFormat getDateFormat(String pattern) {
+        if (StringUtils.isBlank(pattern)) {
+            pattern = DatePattern.DEFAULT_DATE_TIME_FORMAT;
+        }
+        return new SimpleDateFormat(pattern);
     }
 
 }

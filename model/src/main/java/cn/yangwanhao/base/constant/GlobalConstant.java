@@ -9,6 +9,9 @@ package cn.yangwanhao.base.constant;
  */
 public class GlobalConstant {
 
+    /** 空字符串 */
+    public static final String EMPTY_STRING = "";
+
     public static final class User {
         /** 当前登录用户信息 */
         public static final String LOGIN_USER_INFO = "login_user_info";
