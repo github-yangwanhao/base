@@ -135,7 +135,7 @@ public class DateUtils {
         if (date == null) {
             return GlobalConstant.EMPTY_STRING;
         }
-        SimpleDateFormat sdf = getDateFormat(pattern);
+        SimpleDateFormat sdf = SimpleDateFormatUtil.getFormat(pattern);
         return sdf.format(date);
     }
 
@@ -147,19 +147,6 @@ public class DateUtils {
      */
     public static String getDateString(Date date) {
         return getDateString(date, "");
-    }
-
-    /**
-     * 根据传入pattern格式化日期
-     *
-     * @param pattern pattern
-     * @return SimpleDateFormat
-     */
-    private static SimpleDateFormat getDateFormat(String pattern) {
-        if (StringUtils.isBlank(pattern)) {
-            pattern = DatePattern.DEFAULT_DATE_TIME_FORMAT;
-        }
-        return new SimpleDateFormat(pattern);
     }
 
 }

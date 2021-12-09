@@ -78,4 +78,9 @@ public abstract class AbstractThreadContext {
             threadContext.set(map);
         }
     }
+
+    public Map<String, Object> getAll() {
+        ThreadLocal<Map<String, Object>> threadContext = getThreadContext();
+        return threadContext.get();
+    }
 }
