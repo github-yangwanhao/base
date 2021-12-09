@@ -131,7 +131,7 @@ public class DateUtils {
      * @param pattern pattern
      * @return String
      */
-    public static String date2String(Date date, String pattern) {
+    public static String getDateString(Date date, String pattern) {
         if (date == null) {
             return GlobalConstant.EMPTY_STRING;
         }
