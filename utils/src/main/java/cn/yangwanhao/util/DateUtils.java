@@ -146,11 +146,7 @@ public class DateUtils {
      * @return String
      */
     public static String getDateString(Date date) {
-        if (date == null) {
-            return GlobalConstant.EMPTY_STRING;
-        }
-        SimpleDateFormat sdf = getDateFormat("");
-        return sdf.format(date);
+        return getDateString(date, "");
     }
 
     /**
