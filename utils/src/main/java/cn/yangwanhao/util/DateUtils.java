@@ -140,6 +140,20 @@ public class DateUtils {
     }
 
     /**
+     * 按照format把date转为string
+     *
+     * @param date date
+     * @return String
+     */
+    public static String getDateString(Date date) {
+        if (date == null) {
+            return GlobalConstant.EMPTY_STRING;
+        }
+        SimpleDateFormat sdf = getDateFormat("");
+        return sdf.format(date);
+    }
+
+    /**
      * 根据传入pattern格式化日期
      *
      * @param pattern pattern
