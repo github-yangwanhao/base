@@ -68,7 +68,7 @@ public class SimpleDateFormatTest {
         for (int i = 0; i < count; i++) {
             String pattern = PATTERNS[i % PATTERNS.length];
             CompletableFuture<String> completableFuture = CompletableFuture.supplyAsync(
-                () -> DateUtils.getDateString1(now, pattern)
+                () -> DateUtils.getDateString(now, pattern)
             );
             cfs.add(completableFuture);
         }
