@@ -25,14 +25,6 @@ public class AppParamUtil {
         return (LoginUserInfo) ThreadContextStore.getInstance().get(GlobalConstant.User.LOGIN_USER_INFO);
     }
 
-    public static String getLoginUserId() {
-        LoginUserInfo loginUserInfo = getLoginUserInfo();
-        if (loginUserInfo == null) {
-            throw new BasicException(EnumBasicErrorCode.G500302);
-        }
-        return loginUserInfo.getUserId();
-    }
-
     public static void setParam(String key, Object value) {
         ThreadContextStore.getInstance().set(key, value);
     }
@@ -49,7 +41,4 @@ public class AppParamUtil {
         ThreadContextStore.getInstance().clean();
     }
 
-    public static Map<String, Object> getAll() {
-        return ThreadContextStore.getInstance().getAll();
-    }
 }
