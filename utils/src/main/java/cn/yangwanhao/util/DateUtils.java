@@ -135,6 +135,9 @@ public class DateUtils {
         if (date == null) {
             return GlobalConstant.EMPTY_STRING;
         }
+        if (StringUtils.isBlank(pattern)) {
+            pattern = DatePattern.DEFAULT_DATE_TIME_FORMAT;
+        }
         SimpleDateFormat sdf = SimpleDateFormatUtil.getFormat(pattern);
         return sdf.format(date);
     }
@@ -146,7 +149,7 @@ public class DateUtils {
      * @return String
      */
     public static String getDateString(Date date) {
-        return getDateString(date, "");
+        return getDateString(date, DatePattern.DEFAULT_DATE_TIME_FORMAT);
     }
 
 }
