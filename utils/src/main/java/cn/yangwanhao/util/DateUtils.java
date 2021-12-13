@@ -1,5 +1,6 @@
 package cn.yangwanhao.util;
 
+import java.text.ParseException;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -9,6 +10,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import cn.yangwanhao.base.constant.DatePattern;
 import cn.yangwanhao.base.constant.GlobalConstant;
+import cn.yangwanhao.base.enums.EnumBasicErrorCode;
+import cn.yangwanhao.base.exception.BasicException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -99,7 +102,6 @@ public class DateUtils {
 
     /**
      * 判断date是否在beginDate和endDate之间（入参都是Date类型）
-     *
      * @param date date
      * @param beginDate beginDate
      * @param endDate endDate
@@ -114,7 +116,6 @@ public class DateUtils {
 
     /**
      * 将指定格式的日期字符串转换为日期对象。
-     *
      * @param source 日期字符串。
      * @param pattern 模式。
      * @return Date 日期对象。
@@ -126,7 +127,6 @@ public class DateUtils {
 
     /**
      * 按照format把date转为string
-     *
      * @param date date
      * @param pattern pattern
      * @return String
@@ -144,12 +144,60 @@ public class DateUtils {
 
     /**
      * 按照format把date转为string
-     *
      * @param date date
      * @return String
      */
     public static String getDateString(Date date) {
         return getDateString(date, DatePattern.DEFAULT_DATE_TIME_FORMAT);
+    }
+
+    /**
+     * 把字符串的日期转为Date类型
+     * @param dateStr 日期字符串
+     * @param pattern 字符串的格式
+     * @return date
+     */
+    public static Date getDate(String dateStr, String pattern) {
+        SimpleDateFormat dateFormat = SimpleDateFormatUtil.getFormat(pattern);
+        try {
+            return dateFormat.parse(dateStr);
+        } catch (ParseException e) {
+            throw new BasicException(EnumBasicErrorCode.G500204, dateStr, pattern);
+        }
+    }
+
+    /**
+     * 根据生日获取年龄
+     * @param birthDay 生日
+     * @return age
+     */
+    public static Integer getAge(Date birthDay) {
+        Calendar now = Calendar.getInstance();
+        Calendar birth = Calendar.getInstance();
+        birth.setTime(birthDay);
+        if (now.before(birth)) {
+            throw new BasicException(EnumBasicErrorCode.G500203,
+                getDateString(birthDay, DatePattern.DATE_FORMAT_1),
+                getDateString(now.getTime(), DatePattern.DATE_FORMAT_1));
+        }
+        int yearNow = now.get(Calendar.YEAR);
+        int monthNow = now.get(Calendar.MONTH);
+        int dayOfMonthNow = now.get(Calendar.DAY_OF_MONTH);
+
+        int yearBirth = birth.get(Calendar.YEAR);
+        int monthBirth = birth.get(Calendar.MONTH);
+        int dayOfMonthBirth = birth.get(Calendar.DAY_OF_MONTH);
+        // 计算整岁数
+        int age = yearNow - yearBirth;
+        // 当前月份在生日之前，年龄减一
+        if (monthNow < monthBirth) {
+            age--;
+        }
+        //当前日期在生日之前，年龄减一
+        if (monthNow == monthBirth && dayOfMonthNow < dayOfMonthBirth) {
+            age--;
+        }
+        return age;
     }
 
 }
