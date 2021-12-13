@@ -79,8 +79,4 @@ public abstract class AbstractThreadContext {
         }
     }
 
-    public Map<String, Object> getAll() {
-        ThreadLocal<Map<String, Object>> threadContext = getThreadContext();
-        return threadContext.get();
-    }
 }
