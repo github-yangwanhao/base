@@ -20,6 +20,7 @@ class SimpleDateFormatUtil {
             return sdf;
         } else {
             SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+            simpleDateFormat.setLenient(false);
             AppParamUtil.setParam(pattern, simpleDateFormat);
             return simpleDateFormat;
         }
