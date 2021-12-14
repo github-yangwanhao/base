@@ -1,5 +1,6 @@
-package cn.yangwanhao.base.enums;
+package cn.yangwanhao.base.enums.user;
 
+import cn.yangwanhao.base.enums.EnumBasicErrorCode;
 import cn.yangwanhao.base.exception.BasicException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
