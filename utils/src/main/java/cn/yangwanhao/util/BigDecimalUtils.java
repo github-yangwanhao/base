@@ -7,6 +7,7 @@ import cn.yangwanhao.base.enums.EnumBasicErrorCode;
 import cn.yangwanhao.base.exception.BasicException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * description
@@ -15,7 +16,7 @@ import lombok.NoArgsConstructor;
  * @version 1.0.0
  * @date 2019/11/30 11:09
  */
-
+@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BigDecimalUtils {
 
@@ -35,7 +36,7 @@ public class BigDecimalUtils {
      * @return BigDecimal对象
      */
     public static BigDecimal getBigDecimal(Number var) {
-        return new BigDecimal(String.valueOf(var));
+        return getBigDecimal(String.valueOf(var));
     }
 
     /**
@@ -244,7 +245,8 @@ public class BigDecimalUtils {
     private static void validateIsNum(String... args) {
         for (String num : args) {
             if (!ValidateUtils.isNumber(num)) {
-                throw new BasicException(EnumBasicErrorCode.G500201);
+                log.error("字符串[{}]不能被格式化为数字!", num);
+                throw new BasicException(EnumBasicErrorCode.G500201, num);
             }
         }
     }

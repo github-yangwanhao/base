@@ -35,7 +35,7 @@ public enum EnumGender {
                 return item;
             }
         }
-        throw new BasicException(EnumBasicErrorCode.G500301);
+        throw new BasicException(EnumBasicErrorCode.G500301, key);
     }
 
 }

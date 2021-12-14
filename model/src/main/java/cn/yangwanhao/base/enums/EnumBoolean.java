@@ -37,7 +37,7 @@ public enum EnumBoolean {
                 return item;
             }
         }
-        throw new BasicException(EnumBasicErrorCode.G500301);
+        throw new BasicException(EnumBasicErrorCode.G500301, key);
     }
 
 }

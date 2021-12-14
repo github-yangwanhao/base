@@ -4,6 +4,7 @@ import cn.yangwanhao.base.enums.EnumBasicErrorCode;
 import cn.yangwanhao.base.exception.BasicException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * PublicUtil
@@ -12,9 +13,9 @@ import lombok.NoArgsConstructor;
  * @version 1.0.0
  * @date 2019/12/19 10:21
  */
-
+@Slf4j
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class PublicUtils {
+public class MobileUtils {
 
 
     /**
@@ -24,7 +25,8 @@ public class PublicUtils {
      */
     public static String getMaskPhone(String phone) {
         if (!ValidateUtils.isMobileNumber(phone)) {
-            throw new BasicException(EnumBasicErrorCode.G500202);
+            log.error("字符串[{}]不是手机号格式", phone);
+            throw new BasicException(EnumBasicErrorCode.G500202, phone);
         }
         return phone.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
     }

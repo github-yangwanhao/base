@@ -1,8 +1,11 @@
 package cn.yangwanhao.util.test;
 
+import java.math.BigDecimal;
+
 import org.junit.Assert;
 import org.junit.Test;
 
+import cn.yangwanhao.base.exception.BasicException;
 import cn.yangwanhao.util.BigDecimalUtils;
 
 /**
@@ -65,6 +68,12 @@ public class BigDecimalUtilsTest {
         Assert.assertEquals(1000, BigDecimalUtils.movePointRight("10", 2).intValue());
 
         Assert.assertEquals(0.01, BigDecimalUtils.movePointRight(0.01, 0).doubleValue(), 0);
+    }
+
+    @Test
+    public void testGetBigDecimal() {
+        Assert.assertEquals(new BigDecimal("1.2"), BigDecimalUtils.getBigDecimal("1.2"));
+        Assert.assertThrows(BasicException.class, () -> BigDecimalUtils.getBigDecimal("1a"));
     }
 
 }
