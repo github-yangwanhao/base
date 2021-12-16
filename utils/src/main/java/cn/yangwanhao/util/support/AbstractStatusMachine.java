@@ -23,6 +23,7 @@ public abstract class AbstractStatusMachine {
     protected abstract void init();
 
     public boolean checkStatus(Class clazz, String currentStatus, String nextStatus) {
+        boolean flag = false;
         List<StatusMachineRelation> statusMachineRelations = map.get(clazz);
         if (statusMachineRelations == null || statusMachineRelations.size() == 0) {
             throw new RuntimeException(clazz.getName() + "没有被初始化");
@@ -31,13 +32,13 @@ public abstract class AbstractStatusMachine {
             .filter(r -> r.getCurrentStatus().equals(currentStatus))
             .map(StatusMachineRelation::getNextStatus)
             .collect(Collectors.toList());
-        log.info("状态枚举[{}],当前状态:[{}],期望流转状态:[{}],允许流转状态:{}", clazz.getName(), currentStatus, nextStatus, allowedStatusList);
         for (StatusMachineRelation relation : statusMachineRelations) {
-            if (relation.getCurrentStatus().equals(currentStatus) &&
-                relation.getNextStatus().equals(nextStatus)) {
-                return true;
+            if (relation.getCurrentStatus().equals(currentStatus) && relation.getNextStatus().equals(nextStatus)) {
+                flag = true;
+                break;
             }
         }
-        return false;
+        log.info("状态校验{},枚举[{}],当前状态:[{}],期望流转状态:[{}],允许流转状态:{}", flag ? "成功":"失败", clazz.getName(), currentStatus, nextStatus, allowedStatusList);
+        return flag;
     }
 }
