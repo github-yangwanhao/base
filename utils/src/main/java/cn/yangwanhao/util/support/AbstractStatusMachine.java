@@ -21,20 +21,21 @@ public abstract class AbstractStatusMachine {
 
     protected Map<Class<?>, List<StatusMachineRelation>> map = new HashMap<>();
 
+    protected abstract Class<?> enumClass();
+
     protected abstract void init();
 
     /**
      * 校验状态枚举是否被允许从当前状态流转至期望状态
-     * @param clazz 枚举类
      * @param currentStatus 当前状态
      * @param nextStatus 期望流转至状态
      * @return 校验结果
      */
-    public boolean checkStatus(Class<?> clazz, String currentStatus, String nextStatus) {
+    public boolean checkStatus(String currentStatus, String nextStatus) {
         boolean flag = false;
-        List<StatusMachineRelation> statusMachineRelations = map.get(clazz);
+        List<StatusMachineRelation> statusMachineRelations = map.get(enumClass());
         if (statusMachineRelations == null || statusMachineRelations.size() == 0) {
-            throw new RuntimeException(clazz.getName() + "没有被初始化");
+            throw new RuntimeException(enumClass().getName() + "没有被初始化");
         }
         // 根据当前状态筛选出可以被允许流转的状态
         List<String> allowedStatusList = statusMachineRelations.stream()
@@ -44,7 +45,7 @@ public abstract class AbstractStatusMachine {
         if (CollectionUtils.isNotEmpty(allowedStatusList) && allowedStatusList.contains(nextStatus)) {
             flag = true;
         }
-        log.info("状态校验结果:[{}},枚举[{}],当前状态:[{}],期望流转状态:[{}],允许流转状态:{}", flag ? "成功":"失败", clazz.getName(), currentStatus, nextStatus, allowedStatusList);
+        log.info("状态校验结果:[{}},枚举[{}],当前状态:[{}],期望流转状态:[{}],允许流转状态:{}", flag ? "成功":"失败", enumClass().getName(), currentStatus, nextStatus, allowedStatusList);
         return flag;
     }
 }
