@@ -20,22 +20,22 @@ public class ResponseMessage<E> implements Serializable {
 
     private static final long serialVersionUID = -1862380104329983969L;
 
-    private static final Integer SUCCESS_CODE = 200;
-    private static final Integer ERROR_CODE = 500;
+    private static final String SUCCESS_CODE = "200";
+    private static final String ERROR_CODE = "500";
     private static final String SUCCESS_MESSAGE = "操作成功";
     private static final String ERROR_MESSAGE = "操作失败";
 
-    private Integer code;
+    private String code;
     private String message;
     private E data;
 
-    private ResponseMessage(Integer code, String message, E data) {
+    private ResponseMessage(String code, String message, E data) {
         this.code = code;
         this.message = message;
         this.data = data;
     }
 
-    private ResponseMessage(Integer code, String message) {
+    private ResponseMessage(String code, String message) {
         this(code, message, null);
     }
 
@@ -55,7 +55,7 @@ public class ResponseMessage<E> implements Serializable {
         return setMessage(ERROR_CODE, ERROR_MESSAGE);
     }
 
-    public static <E>ResponseMessage<E> error(Integer code, String message) {
+    public static <E>ResponseMessage<E> error(String code, String message) {
         return setMessage(code, message);
     }
 
@@ -63,11 +63,11 @@ public class ResponseMessage<E> implements Serializable {
         return setMessage(ERROR_CODE, ERROR_MESSAGE, result);
     }
 
-    private static <E> ResponseMessage<E> setMessage(Integer code, String message) {
+    private static <E> ResponseMessage<E> setMessage(String code, String message) {
         return new ResponseMessage<>(code, message);
     }
 
-    private static <E> ResponseMessage<E> setMessage(Integer code, String message, E result) {
+    private static <E> ResponseMessage<E> setMessage(String code, String message, E result) {
         return new ResponseMessage<>(code, message, result);
     }
 
