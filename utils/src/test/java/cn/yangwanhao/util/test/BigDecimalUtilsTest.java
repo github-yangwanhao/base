@@ -5,8 +5,8 @@ import java.math.BigDecimal;
 import org.junit.Assert;
 import org.junit.Test;
 
-import cn.yangwanhao.base.exception.BasicException;
-import cn.yangwanhao.util.BigDecimalUtils;
+import cn.yangwanhao.model.exception.BasicException;
+import cn.yangwanhao.util.util.BigDecimalUtils;
 
 /**
  * test BigDecimalUtils

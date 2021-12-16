@@ -4,7 +4,7 @@ import java.util.Date;
 
 import org.junit.Test;
 
-import cn.yangwanhao.util.DateUtils;
+import cn.yangwanhao.util.util.DateUtils;
 
 /**
  * DateUtilsTest

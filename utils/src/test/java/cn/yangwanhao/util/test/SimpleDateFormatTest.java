@@ -12,8 +12,8 @@ import org.apache.commons.lang3.time.StopWatch;
 import org.junit.Assert;
 import org.junit.Test;
 
-import cn.yangwanhao.base.constant.DatePattern;
-import cn.yangwanhao.util.DateUtils;
+import cn.yangwanhao.model.constant.DatePattern;
+import cn.yangwanhao.util.util.DateUtils;
 
 /**
  * @author 杨万浩

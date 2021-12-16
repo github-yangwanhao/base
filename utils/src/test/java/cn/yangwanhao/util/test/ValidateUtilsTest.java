@@ -3,7 +3,7 @@ package cn.yangwanhao.util.test;
 import org.junit.Assert;
 import org.junit.Test;
 
-import cn.yangwanhao.util.ValidateUtils;
+import cn.yangwanhao.util.util.ValidateUtils;
 
 /**
  * ValidateUtilsTest

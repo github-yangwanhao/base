@@ -3,8 +3,8 @@ package cn.yangwanhao.util.test;
 import org.junit.Assert;
 import org.junit.Test;
 
-import cn.yangwanhao.base.exception.BasicException;
-import cn.yangwanhao.util.MobileUtils;
+import cn.yangwanhao.model.exception.BasicException;
+import cn.yangwanhao.util.util.MobileUtils;
 
 /**
  * PublicUtilsTest

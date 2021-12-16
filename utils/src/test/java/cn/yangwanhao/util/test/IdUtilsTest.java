@@ -6,7 +6,7 @@ import java.util.TreeSet;
 import org.junit.Assert;
 import org.junit.Test;
 
-import cn.yangwanhao.util.IdUtils;
+import cn.yangwanhao.util.util.IdUtils;
 
 /**
  * IdUtilsTest
